@@ -40,7 +40,6 @@ class MainWindow(tk.Tk):
 
         window = tk.Tk()
         window.title('Counter')
-        self.window = window
 
         self.create_frame()
         self.bind("<<WidgetLoad>>", self.check_queue)
@@ -51,7 +50,7 @@ class MainWindow(tk.Tk):
         self.img2 = img2
 
         # Run function initiation
-        self.run(coords, t_preds, t_counter)
+        self.run(window, coords, t_preds, t_counter)
     
     def check_queue(self, event):
         '''
@@ -79,49 +78,49 @@ class MainWindow(tk.Tk):
                 self.counter7_string.set(msg.ticket_value)
             elif msg.table == 8:
                 self.counter8_string.set(msg.ticket_value)
-            self.window.update()
+            window.update()
         elif msg.ticket_type == TicketPurpose.Update_Image:
             if msg.table == 1:
                 self.bell1.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell1.configure(image='')
             elif msg.table == 2:
                 self.bell2.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell2.configure(image='')
             elif msg.table == 3:
                 self.bell3.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell3.configure(image='')
             elif msg.table == 4:
                 self.bell4.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell4.configure(image='')
             elif msg.table == 5:
                 self.bell5.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell5.configure(image='')
             elif msg.table == 6:
                 self.bell6.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell6.configure(image='')
             elif msg.table == 7:
                 self.bell7.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell7.configure(image='')
             elif msg.table == 8:
                 self.bell8.configure(image=self.img2)
-                self.window.update()
+                window.update()
                 time.sleep(3)
                 self.bell8.configure(image='')
-            self.window.update()
+            window.update()
 
     def create_frame(self) -> tk.Frame:
         '''
@@ -490,14 +489,14 @@ class MainWindow(tk.Tk):
         img = Image.open(io.BytesIO(img_url))
         img.save(image_path)
 
-    def run(self, coords, t_preds, t_counter):
+    def run(self, window, coords, t_preds, t_counter):
         '''
         Function initiated from the class init function
         It loops through the functions; screenshot, preds and text_subthread.
         (To screenshot every second the live stream, create predictions from it and update tkinter window)
         '''
         # repeater = 0
-        while self:
+        while window:
             self.screenshot()
             coords, t_preds, t_counter = preds(image_path, coords, t_preds, t_counter)
             # self.text_updater(coords, t_preds, t_counter)
