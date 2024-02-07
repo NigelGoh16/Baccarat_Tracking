@@ -38,6 +38,10 @@ class MainWindow(tk.Tk):
         self.wm_attributes('-topmost', True)
         self.queue_message = Queue()
 
+        window = tk.Tk()
+        window.title('Counter')
+        self.window = window
+
         self.create_frame()
         self.bind("<<WidgetLoad>>", self.check_queue)
 
@@ -75,49 +79,49 @@ class MainWindow(tk.Tk):
                 self.counter7_string.set(msg.ticket_value)
             elif msg.table == 8:
                 self.counter8_string.set(msg.ticket_value)
-            self.update()
+            self.window.update()
         elif msg.ticket_type == TicketPurpose.Update_Image:
             if msg.table == 1:
                 self.bell1.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell1.configure(image='')
             elif msg.table == 2:
                 self.bell2.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell2.configure(image='')
             elif msg.table == 3:
                 self.bell3.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell3.configure(image='')
             elif msg.table == 4:
                 self.bell4.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell4.configure(image='')
             elif msg.table == 5:
                 self.bell5.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell5.configure(image='')
             elif msg.table == 6:
                 self.bell6.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell6.configure(image='')
             elif msg.table == 7:
                 self.bell7.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell7.configure(image='')
             elif msg.table == 8:
                 self.bell8.configure(image=self.img2)
-                self.update()
+                self.window.update()
                 time.sleep(3)
                 self.bell8.configure(image='')
-            self.update()
+            self.window.update()
 
     def create_frame(self) -> tk.Frame:
         '''
